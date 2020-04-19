@@ -2,40 +2,6 @@
   <div class="nav-wrapper">
     <div class="content">
       <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p>
-      <p>money.vue</p><p>money.vue</p>
-
-
     </div>
     <Nav/>
   </div>
