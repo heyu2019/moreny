@@ -10,6 +10,8 @@
 </template>
 
 <script lang="ts">
+  import x from '@/assets/icons/labels.svg';
+  console.log(x)
   export default {
     name: 'Nav'
   };
