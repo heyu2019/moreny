@@ -1,7 +1,7 @@
 <template>
   <div>
     <layout>
-      <p>xxxx.vue</p>
+      xxxx.vue
     </layout>
   </div>
 </template>
