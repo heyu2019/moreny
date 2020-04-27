@@ -9,23 +9,38 @@
   </ul>
 </template>
 
-<script>
-  export default {
-    name: 'types',
-    data(){
-      return {
-        type:'-' //'-'表示支出 '+'表示收入
+<script lang="ts">
+  import Vue from 'vue';
+  import {Component, Prop} from 'vue-property-decorator';
+  //文档提示更智能
+  //不能随便写toString
+  //编译报错
+  @Component
+  export default class Types extends Vue {
+    type = '-'; //'-'表示支出 '+'表示收入
+    selectedType(type: string) {//type只能是'-'或者'+'
+      if (type !== '-' && type !== '+') {
+        throw new Error('type is unknow');
       }
-    },
-    methods: {
-      selectedType(type){
-        if (type !== '-' && type !== '+'){
-          throw new  Error('type is unknow')
-        }
-        this.type = type
-      }
+      this.type = type;
     }
-  };
+  }
+  /*  export default {
+      name: 'types',
+      data() {
+        return {
+          type: '-' //'-'表示支出 '+'表示收入
+        }
+      },
+      methods: {
+        selectedType(type) {
+          if (type !== '-' && type !== '+') {
+            throw new Error('type is unknow')
+          }
+          this.type = type
+        }
+      }
+    };*/
 </script>
 
 <style lang="scss" scoped>
