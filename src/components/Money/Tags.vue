@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
     <ul class="current">
       <li v-for="tag in dataSource" :key="tag"
@@ -14,19 +14,29 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component,Prop} from 'vue-property-decorator';
+  import {Component, Prop} from 'vue-property-decorator';
 
   @Component
-  export default class Tags extends Vue{
+  export default class Tags extends Vue {
     @Prop() dataSource: string[] | undefined;
     selectedTags: string[] = []; //被选中的tag
     //标签的选中和取消
-    toggle(tag: string){
+    toggle(tag: string) {
       const index = this.selectedTags.indexOf(tag);
-      if (index >=0) {
-        this.selectedTags.splice(index,1)
-      }else{
+      if (index >= 0) {
+        this.selectedTags.splice(index, 1);
+      } else {
         this.selectedTags.push(tag);
+      }
+    }
+
+    create() {
+      const name = window.prompt('请输入标签名');
+      if (name === '') {
+        window.prompt('标签名不能为空');
+      } else if (this.dataSource) {
+        this.$emit('update:dataSource',
+          [...this.dataSource, name]);
       }
     }
   }
@@ -39,11 +49,13 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column-reverse;
+
     > .current {
       display: flex;
       flex-wrap: wrap;
+
       > li {
-        $bg:#D9D9D9;
+        $bg: #D9D9D9;
         background: $bg;
         $h: 24px;
         height: $h;
@@ -52,8 +64,9 @@
         padding: 0 16px;
         margin-right: 12px;
         margin-top: 4px;
+
         &.selected {
-          background: darken($bg,50%);
+          background: darken($bg, 50%);
           color: white;
         }
       }
