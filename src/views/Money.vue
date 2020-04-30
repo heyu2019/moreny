@@ -1,6 +1,6 @@
 <template>
   <layout class-prefix="layout">
-    {{recordList}}
+    {{recordList}}}
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Types :value.sync="record.type"/>
     <notes @update:value="onUpdateNotes"/>
@@ -15,6 +15,9 @@
   import Notes from '@/components/Money/Notes.vue';
   import Tags from '@/components/Money/Tags.vue';
   import {Component, Watch} from 'vue-property-decorator';
+  import model from '@/model';
+
+  const recordList = model.fetch();
   //数据库升级，可写可不写代码(版本升级)
   /*  const version = window.localStorage.getItem('version') || '0';
     const recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]');
@@ -27,21 +30,14 @@
       window.localStorage.setItem('recordList',JSON.stringify(recordList))
     }
     window.localStorage.setItem('version', '0.0.2');*/
-  type Record = {
-    tags: string[];  //在tags之后打问号代表可以不设置tags的值
-    notes: string;
-    type: string;
-    amount: number;
-    createdAt?: string; //除了写数据类型外还可以写类（构造函数）
-  } //用于记录各组件的数据
 
   @Component({
     components: {Tags, Notes, Types, NumberPad}
   })
   export default class Money extends Vue {
     tags = ['衣', '食', '住', '行'];
-    recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
-    record: Record = {tags: [], notes: '', type: '-', amount: 0, createdAt: ''};
+    recordList: RecordItem[] = recordList;
+    record: RecordItem = {tags: [], notes: '', type: '-', amount: 0, createdAt: ''};
 
     onUpdateTags(value: string[]) {
       this.record.tags = value;
@@ -56,14 +52,14 @@
     }
 
     saveRecord() {
-      const record2: Record = JSON.parse(JSON.stringify(this.record)); //深拷贝
+      const record2: RecordItem = model.clone(this.record); //深拷贝
       record2.createdAt = this.GMTToStr();
       this.recordList.push(record2);
     }
 
     @Watch('recordList')
     onRecordChange() {
-      window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
+      model.save(this.recordList);
     }
 
     //转换为中国时间
