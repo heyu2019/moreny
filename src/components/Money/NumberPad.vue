@@ -63,7 +63,6 @@
     ok() {
       this.$emit('update:value', this.output);
       this.$emit('submit', this.output);
-      this.output = '0'; //点击ok之后 把输入的数据变为0
     }
   }
 </script>
