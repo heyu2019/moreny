@@ -1,9 +1,9 @@
 <template>
   <ul class="types">
-    <li :class="type==='-' && 'selected'"
+    <li :class="value==='-' && 'selected'"
         @click="selectedType('-')">支出
     </li>
-    <li :class="type==='+' && 'selected'"
+    <li :class="value==='+' && 'selected'"
         @click="selectedType('+')">收入
     </li>
   </ul>
@@ -11,18 +11,20 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
   //文档提示更智能
   //不能随便写toString
   //编译报错
   @Component
   export default class Types extends Vue {
-    type = '-'; //'-'表示支出 '+'表示收入
+    @Prop() readonly value!: string;
+
+    //type = '-'; //'-'表示支出 '+'表示收入
     selectedType(type: string) {//type只能是'-'或者'+'
       if (type !== '-' && type !== '+') {
         throw new Error('type is unknow');
       }
-      this.type = type;
+      this.$emit('update:value', type);
     }
   }
   /*  export default {

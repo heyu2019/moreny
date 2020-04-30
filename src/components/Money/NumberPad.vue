@@ -61,7 +61,8 @@
 
     //对应的累加按钮
     ok() {
-      console.log("暂时还没做好的ok")
+      this.$emit('update:value',this.output);
+
     }
   }
 </script>

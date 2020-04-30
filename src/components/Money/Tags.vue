@@ -28,8 +28,9 @@
       } else {
         this.selectedTags.push(tag);
       }
+      this.$emit('update:value',this.selectedTags)
     }
-
+    //创建新的标签
     create() {
       const name = window.prompt('请输入标签名');
       if (name === '') {
