@@ -1,6 +1,5 @@
 <template>
   <layout class-prefix="layout">
-    {{recordList}}}
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Types :value.sync="record.type"/>
     <notes @update:value="onUpdateNotes"/>
@@ -15,9 +14,11 @@
   import Notes from '@/components/Money/Notes.vue';
   import Tags from '@/components/Money/Tags.vue';
   import {Component, Watch} from 'vue-property-decorator';
-  import model from '@/model';
+  import recordListModel from '@/models/recordListModel';
+  import tagListModel from '@/models/tagListModel';
 
-  const recordList = model.fetch();
+  const recordList = recordListModel.fetch();
+  const tagList = tagListModel.fetch();
   //数据库升级，可写可不写代码(版本升级)
   /*  const version = window.localStorage.getItem('version') || '0';
     const recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]');
@@ -35,7 +36,7 @@
     components: {Tags, Notes, Types, NumberPad}
   })
   export default class Money extends Vue {
-    tags = ['衣', '食', '住', '行'];
+    tags = tagList;
     recordList: RecordItem[] = recordList;
     record: RecordItem = {tags: [], notes: '', type: '-', amount: 0, createdAt: ''};
 
@@ -52,26 +53,25 @@
     }
 
     saveRecord() {
-      const record2: RecordItem = model.clone(this.record); //深拷贝
+      const record2: RecordItem = recordListModel.clone(this.record); //深拷贝
       record2.createdAt = this.GMTToStr();
       this.recordList.push(record2);
     }
 
     @Watch('recordList')
     onRecordChange() {
-      model.save(this.recordList);
+      recordListModel.save(this.recordList);
     }
 
     //转换为中国时间
     GMTToStr() {
       const date = new Date();
-      const Str = date.getFullYear() + '-' +
+      return date.getFullYear() + '-' +
         (date.getMonth() + 1) + '-' +
         date.getDate() + ' ' +
         date.getHours() + ':' +
         date.getMinutes() + ':' +
         date.getSeconds();
-      return Str;
     }
   }
 </script>
