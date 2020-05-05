@@ -1,10 +1,16 @@
 <template>
   <Layout>
-    <div>
-      <Icon name="left"/>
-      <span>编辑标签</span>
+    <div class="navBar">
+      <Icon class="leftIcon" name="left"/>
+      <span class="tittle">编辑标签</span>
+      <span class="rightIcon"></span>
     </div>
-    <Notes file-name="标签名" placeholder="请输入标签名"/>
+    <div class="form-wrapper">
+      <FormItem file-name="标签名" placeholder="请输入标签名"/>
+    </div>
+    <div class="button-wrapper">
+      <Button>删除标签</Button>
+    </div>
   </Layout>
 </template>
 
@@ -12,25 +18,58 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import tagListModel from '@/models/tagListModel';
-  import Notes from '@/components/Money/Notes.vue';
+  import FormItem from '@/components/Money/FormItem.vue';
+  import Button from '@/components/Button.vue';
+
   @Component({
-    components: {Notes}
+    components: {Button,FormItem}
   })
   export default class EditLabel extends Vue {
-    created(){
+    created() {
       const id = this.$route.params.id; //route用来获取路由得信息
       tagListModel.fetch();
       const tags = tagListModel.data;
-      const tag =tags.filter(t=>t.id===id)[0];
-      if (tag){
-        console.log(tag)
-      }else{
-        this.$router.replace('/404') //routeer用于转发等信息
+      const tag = tags.filter(t => t.id === id)[0];
+      if (tag) {
+        console.log(tag);
+      } else {
+        this.$router.replace('/404'); //routeer用于转发等信息
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  .navBar {
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 16px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    > .tittle {
+
+    }
+
+    > .leftIcon {
+      width: 24px;
+      height: 24px;
+    }
+
+    > .rightIcon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .form-wrapper{
+    background: white;
+    margin-top: 8px;
+  }
+  .button-wrapper {
+    text-align: center;
+    padding: 16px;
+    margin-top: 44-16px;
+  }
 </style>
