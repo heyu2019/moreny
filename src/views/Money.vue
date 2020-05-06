@@ -57,25 +57,12 @@
     }
 
     saveRecord() {
-      const record2: RecordItem = recordListModel.clone(this.record); //深拷贝
-      record2.createdAt = this.GMTToStr();
-      this.recordList.push(record2);
+      recordListModel.create(this.record);
     }
 
     @Watch('recordList')
     onRecordChange() {
-      recordListModel.save(this.recordList);
-    }
-
-    //转换为中国时间
-    GMTToStr() {
-      const date = new Date();
-      return date.getFullYear() + '-' +
-        (date.getMonth() + 1) + '-' +
-        date.getDate() + ' ' +
-        date.getHours() + ':' +
-        date.getMinutes() + ':' +
-        date.getSeconds();
+      recordListModel.save();
     }
   }
 </script>
@@ -84,6 +71,7 @@
     display: flex;
     flex-direction: column-reverse; //通过倒转实现tags的空隙
   }
+
   .notes {
     padding: 12px 0;
   }
