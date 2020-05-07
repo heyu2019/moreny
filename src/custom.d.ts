@@ -17,12 +17,7 @@ type tagListModel = {
   remove: (id: string) => boolean;
   update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
 }
+/*
 interface Window {
-  tagList: Tag[];
-  createTag: (name: string) => void;
-  removeTag: (id: string) => boolean;
-  updateTag: (id: string,name: string) => 'success' | 'not found' | 'duplicated'; //tagListModel['update']返回tagListModel里update一样的值
-  findTag: (id: string) => Tag | undefined;
-  recordList: RecordItem[];
-  createRecord: (record: RecordItem) => void;
-}
+
+}*/

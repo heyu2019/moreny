@@ -20,9 +20,9 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import tagListModel from '@/models/tagListModel';
   import FormItem from '@/components/Money/FormItem.vue';
   import Button from '@/components/Button.vue';
+  import store from '@/store/index2';
 
   @Component({
     components: {Button, FormItem}
@@ -31,7 +31,7 @@
     tag?: Tag = undefined;
 
     created() {
-      this.tag = window.findTag(this.$route.params.id); //route用来获取路由得信息
+      this.tag = store.findTag(this.$route.params.id); //route用来获取路由得信息
       if (!this.tag) {
         this.$router.replace('/404'); //routeer用于转发等信息
       }
@@ -39,13 +39,13 @@
 
     update(name: string) {
       if (this.tag) {
-        window.updateTag(this.tag.id, name);
+        store.updateTag(this.tag.id, name);
       }
     }
 
     remove() {
       if (this.tag) {
-        if (window.removeTag(this.tag.id)) {
+        if (store.removeTag(this.tag.id)) {
           this.$router.back();
         } else {
           window.alert('删除失败');

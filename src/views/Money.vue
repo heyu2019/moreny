@@ -18,6 +18,7 @@
   import FormItem from '@/components/Money/FormItem.vue';
   import Tags from '@/components/Money/Tags.vue';
   import {Component} from 'vue-property-decorator';
+  import store from '@/store/index2';
 
   //数据库升级，可写可不写代码(版本升级)
   /*  const version = window.localStorage.getItem('version') || '0';
@@ -36,8 +37,8 @@
     components: {Tags, FormItem, Types, NumberPad}
   })
   export default class Money extends Vue {
-    tags = window.tagList;
-    recordList= window.recordList;
+    tags = store.tagList;
+    recordList= store.recordList;
     record: RecordItem = {tags: [], notes: '', type: '-', amount: 0, createdAt: ''};
 
     onUpdateTags(value: string[]) {
@@ -53,7 +54,7 @@
     }
 
     saveRecord() {
-      window.createRecord(this.record);
+      store.createRecord(this.record);
     }
 
   }
