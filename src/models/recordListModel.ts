@@ -14,6 +14,7 @@ const recordListModel = {
     const record2: RecordItem = clone(record); //深拷贝
     record2.createdAt = this.GMTToStr();
     this.data.push(record2);
+    this.save();
   },
   //转换为中国时间
   GMTToStr() {
