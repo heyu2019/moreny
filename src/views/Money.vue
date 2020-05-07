@@ -7,7 +7,7 @@
                 @update:value="onUpdateNotes"
                 placeholder="在这里输入备注"/>
     </div>
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags :data-source="tags" @update:value="onUpdateTags"/>
   </layout>
 </template>
 
