@@ -24,14 +24,15 @@
   import Button from '@/components/Button.vue';
 
   @Component({
-    components: {Button, FormItem}
+    components: {Button, FormItem},
   })
   export default class EditLabel extends Vue {
-    tag?: Tag = undefined;
-
+    get tag(){
+      return this.$store.state.currentTag;
+    }
     created() {
-      //TODO
-      //this.tag = store.findTag(this.$route.params.id); //route用来获取路由得信息
+      const id = this.$route.params.id;
+      this.$store.commit('setCurrentTag', id);
       if (!this.tag) {
         this.$router.replace('/404'); //routeer用于转发等信息
       }
@@ -46,7 +47,7 @@
 
     remove() {
       //TODO
-      return
+      return;
       /*if (this.tag) {
         if (store.removeTag(this.tag.id)) {
           this.$router.back();

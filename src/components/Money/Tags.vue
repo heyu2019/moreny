@@ -26,8 +26,6 @@
   })
 
   export default class Tags extends mixins(TagHelper) {
-    //TODO
-
     selectedTags: string[] = []; //被选中的tag
     created() {
       this.$store.commit('fetchTags');
