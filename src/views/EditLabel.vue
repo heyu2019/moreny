@@ -22,7 +22,6 @@
   import {Component} from 'vue-property-decorator';
   import FormItem from '@/components/Money/FormItem.vue';
   import Button from '@/components/Button.vue';
-  import store from '@/store/index2';
 
   @Component({
     components: {Button, FormItem}
@@ -31,7 +30,8 @@
     tag?: Tag = undefined;
 
     created() {
-      this.tag = store.findTag(this.$route.params.id); //route用来获取路由得信息
+      //TODO
+      //this.tag = store.findTag(this.$route.params.id); //route用来获取路由得信息
       if (!this.tag) {
         this.$router.replace('/404'); //routeer用于转发等信息
       }
@@ -39,18 +39,21 @@
 
     update(name: string) {
       if (this.tag) {
-        store.updateTag(this.tag.id, name);
+        //TODO
+        //store.updateTag(this.tag.id, name);
       }
     }
 
     remove() {
-      if (this.tag) {
+      //TODO
+      return
+      /*if (this.tag) {
         if (store.removeTag(this.tag.id)) {
           this.$router.back();
         } else {
           window.alert('删除失败');
         }
-      }
+      }*/
     }
 
     goBack() {

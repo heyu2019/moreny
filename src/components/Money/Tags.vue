@@ -15,11 +15,19 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
-  import store from '@/store/index2';
 
-  @Component
+  @Component({
+    computed: {
+      tagList() {
+        //TODO
+        return [];//tagList = store.fetchTags();
+      }
+    }
+  })
+
   export default class Tags extends Vue {
-    tagList = store.fetchTags();
+    //TODO
+
     selectedTags: string[] = []; //被选中的tag
     //标签的选中和取消
     toggle(tag: string) {
@@ -35,10 +43,12 @@
     //创建新的标签
     create() {
       const name = window.prompt('请输入标签名');
-      if (!name) {
-        return window.prompt('标签名不能为空');
-      }
-      store.createTag(name);
+      //TODO
+      /*      if (!name) {
+              return window.prompt('标签名不能为空');
+            }
+            store.createTag(name)*/
+      
 
     }
   }
