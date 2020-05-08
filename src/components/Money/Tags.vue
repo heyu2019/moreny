@@ -19,8 +19,7 @@
   @Component({
     computed: {
       tagList() {
-        //TODO
-        return [];//tagList = store.fetchTags();
+        return this.$store.state.tagList;
       }
     }
   })
@@ -29,6 +28,10 @@
     //TODO
 
     selectedTags: string[] = []; //被选中的tag
+    created() {
+      this.$store.commit('fetchTags');
+    }
+
     //标签的选中和取消
     toggle(tag: string) {
       const index = this.selectedTags.indexOf(tag);
@@ -43,12 +46,8 @@
     //创建新的标签
     create() {
       const name = window.prompt('请输入标签名');
-      //TODO
-      /*      if (!name) {
-              return window.prompt('标签名不能为空');
-            }
-            store.createTag(name)*/
-      
+      if (!name) {return window.prompt('标签名不能为空');}
+      this.$store.commit('createTag', name);
 
     }
   }

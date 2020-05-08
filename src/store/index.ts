@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Vuex, {Store} from 'vuex';
 import clone from '@/lib/clone';
+import createID from '@/lib/idCreater';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    recordList: [] as RecordItem[]
+    recordList: [] as RecordItem[],
+    tagList: [] as Tag[]
   },
   mutations: {
     fetchRecordList: function (state) {
@@ -32,6 +34,26 @@ const store = new Vuex.Store({
     saveRecords(state) {
       window.localStorage.setItem('recordList',
         JSON.stringify(state.recordList));
+    },
+
+    fetchTags(state) {
+      state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+    },
+
+    createTag(state, name: string) {
+      const id = createID().toString();
+      const names = state.tagList.map(item => item.name);
+      if (names.indexOf(name) >= 0) {
+        window.alert('标签重复');
+        return 'duplicated';
+      }
+      state.tagList.push({id, name: name});
+      store.commit('saveTags');
+      window.alert('创建标签成功');
+      return 'success';
+    },
+    saveTags(state) {
+      window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
     }
   },
 });
