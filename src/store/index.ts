@@ -5,11 +5,7 @@ import createID from '@/lib/idCreater';
 import router from '@/router';
 
 Vue.use(Vuex);
-type RooTState = {
-  recordList: RecordItem[];
-  tagList: Tag[];
-  currentTag?: Tag;
-}
+
 const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
@@ -22,18 +18,7 @@ const store = new Vuex.Store({
     },
     createRecord: function (state, record) {
       const record2: RecordItem = clone(record); //深拷贝
-      //转换为中国时间
-      function GMTToStr() {
-        const date = new Date();
-        return date.getFullYear() + '-' +
-          (date.getMonth() + 1) + '-' +
-          date.getDate() + ' ' +
-          date.getHours() + ':' +
-          date.getMinutes() + ':' +
-          date.getSeconds();
-      }
-
-      record2.createdAt = GMTToStr();
+      record2.createdAt = new Date().toISOString();
       state.recordList.push(record2); //this.recordList?.push(record2)
       store.commit('saveRecords');
     },

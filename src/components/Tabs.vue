@@ -1,9 +1,10 @@
 <template>
-  <ul class="tabs">
+  <ul class="tabs" :class="{[classPrefix+'-tabs']:classPrefix}">
     <li v-for="item in dataSource"
         :class="liClass(item)"
         :key="item.value"
-        @click="selected(item)">
+        @click="selected(item)"
+        class="tabs-item">
       {{item.text}}
     </li>
   </ul>
@@ -13,7 +14,7 @@
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
 
-  type DataSourceItem = {text: string;value: string};
+  type DataSourceItem = { text: string; value: string };
   @Component
   export default class Tabs extends Vue {
     @Prop({required: true, type: Array})
@@ -21,14 +22,15 @@
     @Prop(String) readonly value!: string;
     @Prop(String) classPrefix?: string;
 
-    liClass(item: DataSourceItem){
+    liClass(item: DataSourceItem) {
       return {
-        selected:item.value===this.value
-        ,[this.classPrefix+'-tabs-item']:this.classPrefix
-      }
+        selected: item.value === this.value
+        , [this.classPrefix + '-tabs-item']: this.classPrefix
+      };
     }
-    selected(item: DataSourceItem){
-      this.$emit('update:value',item.value)
+
+    selected(item: DataSourceItem) {
+      this.$emit('update:value', item.value);
     }
   }
 </script>
@@ -40,7 +42,7 @@
     text-align: center;
     font-size: 24px;
 
-    > li {
+    &-item {
       display: flex;
       justify-content: center;
       align-items: center;

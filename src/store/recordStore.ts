@@ -4,17 +4,6 @@ const localStorageKeyName = 'recordList';
 const data: RecordItem[] | undefined = undefined;
 
 
-//转换为中国时间
-function GMTToStr() {
-  const date = new Date();
-  return date.getFullYear() + '-' +
-    (date.getMonth() + 1) + '-' +
-    date.getDate() + ' ' +
-    date.getHours() + ':' +
-    date.getMinutes() + ':' +
-    date.getSeconds();
-}
-
 const recordStore = {
   recordList: [] as RecordItem[],
   fetchRecords() {
@@ -26,7 +15,7 @@ const recordStore = {
   },
   createRecord (record: RecordItem)  {
     const record2: RecordItem = clone(record); //深拷贝
-    record2.createdAt = GMTToStr();
+    record2.createdAt = new Date().toISOString();
     this.recordList && this.recordList.push(record2); //this.recordList?.push(record2)
     recordStore.saveRecords();
   },
