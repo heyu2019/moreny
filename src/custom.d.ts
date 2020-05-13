@@ -4,7 +4,7 @@ type RooTState = {
   currentTag?: Tag;
 }
 type RecordItem = {
-  tags: string[];  //在tags之后打问号代表可以不设置tags的值
+  tags: Tag[];  //在tags之后打问号代表可以不设置tags的值
   notes: string;
   type: string;
   amount: number;

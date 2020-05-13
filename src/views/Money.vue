@@ -1,6 +1,6 @@
 <template>
   <layout class-prefix="layout">
-    <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
+    <NumberPad @update:value="onUpdateAmount" @submit="saveRecord" :value.sync="record.amount"/>
     <Tabs :data-source="typeList" :value.sync="record.type"/>
     <div class="notes">
       <FormItem file-name="备注"
