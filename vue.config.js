@@ -3,8 +3,10 @@ const path = require('path');
 module.exports = {
   lintOnSave: false,
   chainWebpack: config => {
+    {
+      process.env.NODE_ENV ===  'production' ? '/YuPocketbook/' : '/'
+    }
     const dir = path.resolve(__dirname, 'src/assets/icons')
-    process.env.NODE_ENV ===  'production' ? '/YuPocketbook/' : '/',
     config.module
       .rule('svg-sprite')
       .test(/\.svg$/)
