@@ -4,10 +4,10 @@
     <Tabs :data-source="typeList" :value.sync="record.type"/>
     <div class="notes">
       <FormItem file-name="备注"
-                @update:value="onUpdateNotes"
+                :value.sync="record.notes"
                 placeholder="在这里输入备注"/>
     </div>
-    <Tags/>
+    <Tags @update:value="record.tags=$event"/>
   </layout>
 </template>
 
@@ -39,7 +39,8 @@
   export default class Money extends Vue {
     record: RecordItem = {tags: [], notes: '', type: '-', amount: 0, createdAt: ''};
 
-    get recordList(){
+
+    get recordList() {
       return this.$store.state.recordList;
     }
 
@@ -58,7 +59,14 @@
     }
 
     saveRecord() {
+      if (!this.record.tags || this.record.tags.length===0) {
+       return  window.alert('请选择至少一个标签');
+      }
       this.$store.commit('createRecord', this.record);
+      if (this.$store.state.createRecordError === null) {
+        window.alert('已保存');
+        this.record.notes = '';
+      }
     }
 
   }

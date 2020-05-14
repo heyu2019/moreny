@@ -1,5 +1,6 @@
 type RooTState = {
   recordList: RecordItem[];
+  createRecordError: Error | null;
   tagList: Tag[];
   currentTag?: Tag;
 }

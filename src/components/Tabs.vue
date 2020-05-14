@@ -30,6 +30,7 @@
     }
 
     selected(item: DataSourceItem) {
+
       this.$emit('update:value', item.value);
     }
   }

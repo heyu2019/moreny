@@ -4,7 +4,7 @@
       class-prefix="type"
       :data-source="typeList"
       :value.sync="type"/>
-    <ol>
+    <ol v-if="groupedList.length">
       <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{beautiful(group.title)}}<span>￥{{group.total}}</span></h3>
         <ol>
@@ -18,6 +18,9 @@
         </ol>
       </li>
     </ol>
+    <div v-else class="noResult">
+
+    </div>
   </layout>
 </template>
 
@@ -52,7 +55,7 @@
     }
 
     tagString(tags: Tag[]) {
-      return tags.length === 0 ? '无' : tags.join(',');
+      return tags.length === 0 ? '无' : tags.map(t=>t.name).join('，');
     }
 
     get recordList() {
@@ -61,14 +64,15 @@
 
     get groupedList() {
       const {recordList} = this;
-      if (recordList.length === 0) {return []; }
+
 
       const newList = clone(recordList)
         .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
       type Result = { title: string; total?: number; items: RecordItem[] }[];
-
+      if (newList.length === 0) {return []; }
       const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+
       for (let i = 1; i < newList.length; i++) {
         const current = newList[i];
         const last = result[result.length - 1];
@@ -99,6 +103,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .noResult {
+    padding: 16px;
+    text-align: center;
+  }
   ::v-deep {
     .type-tabs-item {
       background: #c4c4c4;
