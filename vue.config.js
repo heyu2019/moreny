@@ -5,9 +5,7 @@ module.exports = {
 
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons')
-    process.env.NODE_ENV === 'production'
-      ? '/YuPocketbook/'
-      : '/'
+    process.env.NODE_ENV === 'production' ? '/YuPocketbook/' : '/',
     config.module
       .rule('svg-sprite')
       .test(/\.svg$/)
