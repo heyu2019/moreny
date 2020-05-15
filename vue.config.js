@@ -3,10 +3,8 @@ const path = require('path');
 module.exports = {
   lintOnSave: false,
   chainWebpack: config => {
-    {
-      process.env.NODE_ENV ===  'production' ? '/YuPocketbook/' : '/'
-    }
     const dir = path.resolve(__dirname, 'src/assets/icons')
+    process.env.NODE_ENV ===  'production' ? '/YuPocketbook/' : '/',
     config.module
       .rule('svg-sprite')
       .test(/\.svg$/)
@@ -17,7 +15,6 @@ module.exports = {
 
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}])
     config.module.rule('svg').exclude.add(dir) //其他svg loader排除icons目录
-
 
   }
 }
