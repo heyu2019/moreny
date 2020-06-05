@@ -12,7 +12,7 @@
                 @update:value="update"/>
     </div>
     <div class="button-wrapper">
-      <Button @click="remove">删除标签</Button>
+      <Button @click="remove" class="button-wrapper-right">删除</Button>
     </div>
   </Layout>
 </template>

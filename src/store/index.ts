@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex, {Store} from 'vuex';
+import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createID from '@/lib/idCreater';
 import router from '@/router';
@@ -86,6 +86,8 @@ const store = new Vuex.Store({
         window.alert('删除失败');
       }
     }
+
+
   },
 });
 

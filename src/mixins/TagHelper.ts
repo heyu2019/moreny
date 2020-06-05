@@ -7,6 +7,9 @@ const map: {[key: string]: string} = {
 
 @Component
 export class TagHelper extends Vue {
+  get tagList(){
+    return this.$store.state.tagList;
+  }
 
   createTag() {
     const name = window.prompt('请输入标签名');
