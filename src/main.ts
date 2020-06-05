@@ -26,7 +26,7 @@ window.onload = function () {
   },0);//解决手机上显示会出现下巴的问题
 };
 
-if (document.documentElement.clientHeight>500){
+if (document.documentElement.clientWidth>500){
   window.alert('请使用手机打开本页面，以此保证浏览效果');
   const img = document.createElement('img')
   img.src='/scanCode.png';

@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   lintOnSave: false,
-  publicPath: process.env.NODE_ENV ===  'production' ? '/yu-pocket-book/' : '/',
+  publicPath: process.env.NODE_ENV ===  'production' ? '/YuPocketbook/' : '/',
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons')
     config.module
