@@ -29,7 +29,7 @@ window.onload = function () {
 if (document.documentElement.clientHeight>500){
   window.alert('请使用手机打开本页面，以此保证浏览效果');
   const img = document.createElement('img')
-  img.src='./scanCode.png';
+  img.src='./sanCode1.png';
   img.style.position = 'fixed';
   img.style.left='50%';
   img.style.top='50%';
